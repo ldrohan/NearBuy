@@ -4,4 +4,8 @@ class ItemsController < ApplicationController
 	def index
 		respond_with Item.all
 	end	
+
+	def map
+		
+	end	
 end

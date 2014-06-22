@@ -1,7 +1,7 @@
 
 function initialize() {
   var mapOptions = {
-    zoom: 4,
+    zoom: 11,
     streetViewControl: false
   };
   map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -12,7 +12,7 @@ function initialize() {
     navigator.geolocation.getCurrentPosition(function(position) {
       var pos = new google.maps.LatLng(position.coords.latitude,
                                        position.coords.longitude);    
-      var image = 'http://www.centervilleohio.gov/ccb/blue-note.gif';
+      var image = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
       var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
       
         
@@ -27,19 +27,20 @@ function initialize() {
         title:"Current Location"
         });
 
-      $.ajax('http://dda4f36.ngrok.com/items.json', {type: 'get'}).success(function(data){
+      $.ajax('/items.json', {type: 'get'}).success(function(data){
           for (var x in data) {
-            console.log(x);
+            console.log(data[x]);
+            console.log(data[x]["lat"]);
             
         
-              var concert = new google.maps.Marker({
-               position: new google.maps.LatLng(data[0][x]["venue"]["latitude"],data[0][x]["venue"]["longitude"]),
-               draggable:false,
-               animation: google.maps.Animation.DROP,
-               icon: image,
-               map: map,
-               title:data[0][x]["venue"]["name"]
-              });  
+               var items = new google.maps.Marker({
+                position: new google.maps.LatLng(data[x]["lat"],data[x]["long"]),
+                draggable:false,
+                animation: google.maps.Animation.DROP,
+                icon: image,
+                map: map,
+                title:data[x]["description"]
+               });  
 
           
          }

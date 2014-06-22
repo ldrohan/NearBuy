@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'items#index'
   get '/items' => 'items#index'
-  # The priority is based upon order of creation: first created -> highest priority.
+  get '/map' => 'items#map'  # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
