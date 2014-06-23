@@ -53,7 +53,7 @@ function initialize() {
                                 infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
                                     '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + this.imageInfo + '>' + '</br>' +
                                     this.descriptionInfo + '</br>' + '</br>' + 'Email Address: ' + this.emailInfo + '</br>' +
-                                    'Phone: ' + this.phoneInfo + '</br>' + '<form><input id="from" placeholder="Your Email"></input></br><textarea id="body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>'
+                                    'Phone: ' + this.phoneInfo + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>'
                                 );
                                 infowindow.open(map, this);
                                 
@@ -63,7 +63,10 @@ function initialize() {
                                 		var from = $("#from").val();
                                 		var body = $("#body").val();
                                 	e.preventDefault();
-                                
+                                	$('#emailform').fadeOut(300,function(){
+		 																	$('#emailform').remove();
+																		});
+                                	$('#sentemail').append('</br><div style="color:red">Your Email has been sent!</div>')
                                 	$.ajax({
                                     url: ('/items/email'),
                                     method: ('post'),
