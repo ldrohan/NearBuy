@@ -17,7 +17,7 @@
  
  #header{
  	color: white
- 	background: #D35400 url(www.google.com) repeat-x bottom;
+ 	background: #D35400 url() repeat-x bottom;
 	position: relative;
 	border-bottom: 1px solid #FFF;
 	z-index: 11;
@@ -26,7 +26,7 @@
  #logo {
  	color: white;
  	font-family: "Lato", sans-serif;
-	background: #E67E22 url(www.google.com) no-repeat 195px 15px;
+	background: #E67E22 url() no-repeat 195px 15px;
 	padding: 1em;
 	text-align: center;
 	font-size: 15px;
@@ -81,7 +81,7 @@
 
 
 #map-canvas{
-	height: 505px;
+	height: 620px;
 	position: relative;
 	overflow: hidden;
 	-webkit-transform: translateZ(0px);
@@ -91,4 +91,24 @@
 	float: left;
 	width: 300px;
 }
+
+.hover{
+	background-color: yellow;
+	font-weight: bold;
+	color: black;
+}
+
+#alert-window {
+	position: absolute;
+	z-index: 999999;
+	font-weight: bold;
+	font-size: 0.9em;
+	padding: 0.75em;
+	background-color: #FC671F;
+	color: #FFF;
+	bottom: 0;
+	width: 100%;
+	cursor: pointer;
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+	filter: alpha(opacity=75);
 

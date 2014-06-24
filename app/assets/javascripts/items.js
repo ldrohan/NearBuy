@@ -38,9 +38,18 @@ function initialize() {
                         var description = data[x]["description"]
 
                         var list = $('.results').append('<div class="listitem" id=' + id + '>' + name +  '</br>' + '</div>')
-                        	$('.listitem').hover(function(){
-                        		markers[this.id].setOpacity(1);                      		                       	                       		
-                        	});
+                        	
+                        	$('.listitem').mouseenter(function(){
+                        		var current = markers[this.id]
+                        		current.setOpacity(1);
+                        		$(this).toggleClass("hover");
+             	         		});
+
+             	         		$('.listitem').mouseleave(function(){
+                        		var current = markers[this.id]
+                        		current.setOpacity(.5);
+                        		$(this).toggleClass("hover");
+             	         		});
                         
                         		
                             // Creates new marker and pushes into markers array
@@ -67,6 +76,8 @@ function initialize() {
                                 );
                                 infowindow.open(map, this);
                                 
+                                $('#' + this.idInfo).toggleClass("hover");
+																
 																google.maps.event.addListener(infowindow, 'domready', function() {
     															$('#submit').click(function(e){
                                 		var from = $("#from").val();
