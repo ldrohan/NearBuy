@@ -13,7 +13,7 @@ function initialize() {
                     position.coords.longitude);
                 var bag = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
-
+                var markers = []
 							  var marker = new google.maps.Marker({
                     position: pos,
                     draggable: false,
@@ -37,23 +37,14 @@ function initialize() {
                         var phone = data[x]["phone"]
                         var description = data[x]["description"]
 
-                        var list = $('.results').append('<div class="list" id=' + id + '>' + name +  '</br>' + '</div>')
-                        	$('.list').click(function(){
-                        		var that = this
-                        		console.log(that.id);
+                        var list = $('.results').append('<div class="listitem" id=' + id + '>' + name +  '</br>' + '</div>')
+                        	$('.listitem').click(function(){
+                        		markers[this.id].setIcon(current);                      		                       	                       		
+                        	});
+                        
                         		
-                        		for(var i = 0; i <= markers.length; i ++){
-                        			
-                        				console.log(i);
-                        				
-                        			
-                        		}
-                        		
-                        	})
-                        var markers = []
-                        markers.push(marker);
-                        console.log(marker);
-                        var marker = new google.maps.Marker({
+                            // Creates new marker and pushes into markers array
+                          markers[data[x]["id"]] = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
                             draggable: false,
                             opacity: .9,
@@ -66,8 +57,8 @@ function initialize() {
                             phoneInfo: phone,
                             descriptionInfo: description,
                             map: map
-												 });
-
+												 	})
+                            
                         google.maps.event.addListener(marker, 'click', function() {
                                 infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
                                     '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + this.imageInfo + '>' + '</br>' +

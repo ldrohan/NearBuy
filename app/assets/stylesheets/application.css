@@ -43,8 +43,8 @@
 	font-family: Helvetica, Arial, Verdana, Lucida Grande, Sans-serif;
 	height:33px;
 	text-align: center;
-	border-bottom: 1px solid black;
-	border-right: 1px solid black;
+	border-bottom: 1px solid white;
+	border-right: 1px solid white;
 	margin-bottom:1px;
 }
 
@@ -60,7 +60,7 @@
 	z-index: 22;
 }
 
-.list{
+.listitem{
 	color: white;
 	font-family: "Lato", sans-serif;
 	border-bottom: 1px solid white;
