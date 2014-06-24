@@ -76,6 +76,14 @@ function initialize() {
                                 );
                                 infowindow.open(map, this);
                                 
+                                var container = $('.results'),
+    																scrollTo = $('#' + this.idInfo);
+
+																container.scrollTop(
+    																scrollTo.offset().top - container.offset().top + container.scrollTop()
+																);
+
+
                                 $('#' + this.idInfo).toggleClass("hover");
 																
 																google.maps.event.addListener(infowindow, 'domready', function() {
