@@ -24,6 +24,10 @@ function initialize() {
                     title: "Current Location"
                 });
 
+							  google.maps.event.addListenerOnce(map, 'idle', function(){
+   								 $('#alert-window').fadeOut(2000);
+								});
+
                 $.ajax('/items.json', {
                     type: 'get'
                 }).success(function(data) {
@@ -37,21 +41,30 @@ function initialize() {
                         var phone = data[x]["phone"]
                         var description = data[x]["description"]
 
+
                         var list = $('.results').append('<div class="listitem" id=' + id + '>' + name +  '</br>' + '</div>')
                         	
                         	$('.listitem').mouseenter(function(){
                         		var current = markers[this.id]
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
+
              	         		});
 
              	         		$('.listitem').mouseleave(function(){
                         		var current = markers[this.id]
                         		current.setOpacity(.5);
                         		$(this).removeClass("hover");
+                        		openWindow();
+             	         		});
+
+             	         		$('.listitem').click(function(){
+                        		var current = markers[this.id]
+                        		current.setOpacity(1);
+                        		$(this).addClass("hover");
              	         		});
                         
-                        		
+                        	
                             // Creates new marker and pushes into markers array
                           markers[data[x]["id"]] = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
@@ -67,25 +80,44 @@ function initialize() {
                             descriptionInfo: description,
                             map: map
 												 	})
-                            
-                        google.maps.event.addListener(markers[data[x]["id"]], 'click', function() {
+                        
+                        google.maps.event.addListener(markers[data[x]["id"]], 'mouseover', function() {
+    													this.setOpacity(1);
+    													var container = $('.results'),
+    															scrollTo = $('#' + this.idInfo);
+																	container.scrollTop(
+    																scrollTo.offset().top - container.offset().top + container.scrollTop()
+																);
+																	$('#' + this.idInfo).toggleClass("hover");
+													});
+													
+													google.maps.event.addListener(markers[data[x]["id"]], 'mouseout', function() {
+    													this.setOpacity(.5);
+    													$('#' + this.idInfo).toggleClass("hover");
+													});
+                       
+
+                       var openWindow = function() {google.maps.event.addListener(markers[data[x]["id"]], 'click', function() {
                                 infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
                                     '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + this.imageInfo + '>' + '</br>' +
                                     this.descriptionInfo + '</br>' + '</br>' + 'Email Address: ' + this.emailInfo + '</br>' +
-                                    'Phone: ' + this.phoneInfo + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>'
+                                    'Phone: ' + this.phoneInfo + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
                                 );
+                                
                                 infowindow.open(map, this);
                                 
+                               
+                                //Scrolls to correct results id on selected pointer from map
                                 var container = $('.results'),
-    																scrollTo = $('#' + this.idInfo);
-
-																container.scrollTop(
+    															scrollTo = $('#' + this.idInfo);
+																	container.scrollTop(
     																scrollTo.offset().top - container.offset().top + container.scrollTop()
 																);
 
 
-                                $('#' + this.idInfo).toggleClass("hover");
+                                // $('#' + this.idInfo).toggleClass("hover");
 																
+																//Infowindow Email Setup and AJAX backend connection
 																google.maps.event.addListener(infowindow, 'domready', function() {
     															$('#submit').click(function(e){
                                 		var from = $("#from").val();
@@ -109,8 +141,14 @@ function initialize() {
                                     	}
                                 		});
                                   })
+
+
+
 																});
 												});
+
+											} //thisone
+											openWindow();
                 		}
               	});
 
@@ -141,5 +179,5 @@ function initialize() {
             var infowindow = new google.maps.InfoWindow(options);
             map.setCenter(options.position);
         }
-
+    
         google.maps.event.addDomListener(window, 'load', initialize);

@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   get '/map' => 'items#map'
   
   post '/items/email' => 'items#send_email'  
-
+                          
+  post '/favorite' => 'items#save_favorite'
+  get '/favorite' => 'items#favorites_index'    
 
 
   # The priority is based upon order of creation: first created -> highest priority.
