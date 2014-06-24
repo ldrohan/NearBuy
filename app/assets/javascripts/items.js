@@ -42,13 +42,13 @@ function initialize() {
                         	$('.listitem').mouseenter(function(){
                         		var current = markers[this.id]
                         		current.setOpacity(1);
-                        		$(this).toggleClass("hover");
+                        		$(this).addClass("hover");
              	         		});
 
              	         		$('.listitem').mouseleave(function(){
                         		var current = markers[this.id]
                         		current.setOpacity(.5);
-                        		$(this).toggleClass("hover");
+                        		$(this).removeClass("hover");
              	         		});
                         
                         		
