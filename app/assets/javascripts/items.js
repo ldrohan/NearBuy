@@ -11,13 +11,10 @@ function initialize() {
         navigator.geolocation.getCurrentPosition(function(position) {
                 var pos = new google.maps.LatLng(position.coords.latitude,
                     position.coords.longitude);
-                var image = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
+                var bag = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
 
-
-
-
-                var marker = new google.maps.Marker({
+							  var marker = new google.maps.Marker({
                     position: pos,
                     draggable: false,
                     opacity: .7,
@@ -32,22 +29,44 @@ function initialize() {
                 }).success(function(data) {
                     for (var x in data) {
                         var infowindow = new google.maps.InfoWindow();
+                        var id = data[x]["id"]
                         var email = data[x]["email"];
+                        var name = data[x]["name"];
+                        var image = data[x]["image"]
+                        var email = data[x]["email"]
+                        var phone = data[x]["phone"]
+                        var description = data[x]["description"]
+
+                        var list = $('.results').append('<div class="list" id=' + id + '>' + name +  '</br>' + '</div>')
+                        	$('.list').click(function(){
+                        		var that = this
+                        		console.log(that.id);
+                        		
+                        		for(var i = 0; i <= markers.length; i ++){
+                        			
+                        				console.log(i);
+                        				
+                        			
+                        		}
+                        		
+                        	})
+                        var markers = []
+                        markers.push(marker);
+                        console.log(marker);
                         var marker = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
                             draggable: false,
                             opacity: .9,
-
-                            animation: google.maps.Animation.DROP,
-                            icon: image,
-                            titleInfo: data[x]["name"],
-                            imageInfo: data[x]["image"],
-                            emailInfo: data[x]["email"],
-                            phoneInfo: data[x]["phone"],
-                            descriptionInfo: data[x]["description"],
+														animation: google.maps.Animation.DROP,
+                            icon: bag,
+                            idInfo: id,
+                            titleInfo: name,
+                            imageInfo: image,
+                            emailInfo: email,
+                            phoneInfo: phone,
+                            descriptionInfo: description,
                             map: map
-
-                        });
+												 });
 
                         google.maps.event.addListener(marker, 'click', function() {
                                 infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
@@ -57,41 +76,33 @@ function initialize() {
                                 );
                                 infowindow.open(map, this);
                                 
-
-                                google.maps.event.addListener(infowindow, 'domready', function() {
+																google.maps.event.addListener(infowindow, 'domready', function() {
     															$('#submit').click(function(e){
                                 		var from = $("#from").val();
                                 		var body = $("#body").val();
-                                	e.preventDefault();
-                                	$('#emailform').fadeOut(300,function(){
+                                		e.preventDefault();
+                                		$('#emailform').fadeOut(300,function(){
 		 																	$('#emailform').remove();
 																		});
-                                	$('#sentemail').append('</br><div style="color:red">Your Email has been sent!</div>')
-                                	$.ajax({
-                                    url: ('/items/email'),
-                                    method: ('post'),
-                                    data: {
+                                		$('#sentemail').append('</br><div style="color:red">Your Email has been sent!</div>')
+                                		$.ajax({
+                                   	  url: ('/items/email'),
+                                    	method: ('post'),
+                                    	data: {
                                         "email": {
                                             "from": from, "to": email, "body": body
                                         }
-                                    },
-                                    dataType: "json",
-                                    success: function(data) {
-                                        // var bandID = data.id;
-                                        // loadAlbums(bandID);
+                                    	},
+                                    	dataType: "json",
+                                    	success: function(data) {
                                         console.log(data);
-                                    }
-                                	});
+                                    	}
+                                		});
                                   })
-
 																});
-
-                        });
-                                
-                           
-
-                   }
-                });
+												});
+                		}
+              	});
 
 
 
