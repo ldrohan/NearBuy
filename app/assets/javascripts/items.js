@@ -38,8 +38,8 @@ function initialize() {
                         var description = data[x]["description"]
 
                         var list = $('.results').append('<div class="listitem" id=' + id + '>' + name +  '</br>' + '</div>')
-                        	$('.listitem').click(function(){
-                        		markers[this.id].setIcon(current);                      		                       	                       		
+                        	$('.listitem').hover(function(){
+                        		markers[this.id].setOpacity(1);                      		                       	                       		
                         	});
                         
                         		
@@ -47,7 +47,7 @@ function initialize() {
                           markers[data[x]["id"]] = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
                             draggable: false,
-                            opacity: .9,
+                            opacity: .5,
 														animation: google.maps.Animation.DROP,
                             icon: bag,
                             idInfo: id,
@@ -59,7 +59,7 @@ function initialize() {
                             map: map
 												 	})
                             
-                        google.maps.event.addListener(marker, 'click', function() {
+                        google.maps.event.addListener(markers[data[x]["id"]], 'click', function() {
                                 infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
                                     '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + this.imageInfo + '>' + '</br>' +
                                     this.descriptionInfo + '</br>' + '</br>' + 'Email Address: ' + this.emailInfo + '</br>' +
