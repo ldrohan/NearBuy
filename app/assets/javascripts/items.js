@@ -1,9 +1,19 @@
 function initialize() {
 		
+    // var mapOptions = {
+    //     zoom: 9,
+    //     streetViewControl: false
+    // };
+
+    var style_array = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
+
     var mapOptions = {
-        zoom: 11,
-        streetViewControl: false
+        zoom: 9,
+        streetViewControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+    styles: style_array
     };
+
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
@@ -91,7 +101,8 @@ function initialize() {
              	         		});
 
              	         		$('.listitem').click(function(){
-                        		var current = markers[this.id]
+	                       		var current = markers[this.id]
+                        		map.panTo(current.getPosition());
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
              	         		});
