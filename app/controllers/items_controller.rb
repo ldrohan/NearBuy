@@ -10,7 +10,9 @@ class ItemsController < ApplicationController
 	end	
 
 	def send_email
-		PostMailer.post_email(params["email"]["from"],params["email"]["to"],params["email"]["body"])
+		@email = params["email"]["body"]
+		PostMailer.post_email(params["email"]["from"],params["email"]["to"],params["email"]["body"]).deliver
+		
 	end	
 
 	def save_favorite

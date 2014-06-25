@@ -82,14 +82,12 @@ function initialize() {
                         		var current = markers[this.id]
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
-
              	         		});
 
              	         		$('.listitem').mouseleave(function(){
                         		var current = markers[this.id]
                         		current.setOpacity(.5);
                         		$(this).removeClass("hover");
-                        		openWindow();
              	         		});
 
              	         		$('.listitem').click(function(){
