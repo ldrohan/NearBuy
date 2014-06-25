@@ -38,11 +38,22 @@ function initialize() {
 								
     						$('#showfavorites').click(function(e){
 									removeMarkers();
+									$('.listitem').remove();
 									var favoritesData = '/favorite.json'
 									e.preventDefault();
-									everything(favoritesData);
-      						console.log("hello");
-      					});								
+									everything(favoritesData); //executes correct json data call for favorites
+      						console.log("Muh Favez");
+      					});	
+
+      					$('#showresults').click(function(e){
+									removeMarkers();
+									$('.listitem').remove();
+									var allData = '/items.json'
+									e.preventDefault();
+									everything(allData); //executes correct json data call for scraped data
+      						console.log("The Real OG");
+      					});	
+
 							  var marker = new google.maps.Marker({
                     position: pos,
                     draggable: false,
