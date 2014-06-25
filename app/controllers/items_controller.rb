@@ -15,14 +15,15 @@ class ItemsController < ApplicationController
 
 	def save_favorite
 		@favorite = Favorite.new
-		@favorite.name = params['name']
-    @favorite.description = params['description']
-    @favorite.image = params['image']
-    @favorite.email = params['email']
-    @favorite.lat = params['lat']
-    @favorite.long = params['long']
-    @favorite.phone = params['phone']
+		@favorite.name = params["favorite"]['name']
+    @favorite.description = params["favorite"]['description']
+    @favorite.image = params["favorite"]['image']
+    @favorite.email = params["favorite"]['email']
+    @favorite.lat = params["favorite"]['lat']
+    @favorite.long = params["favorite"]['long']
+    @favorite.phone = params["favorite"]['phone']
     @favorite.save
+    respond_with @favorite
 	end	
 
 	def favorites_index

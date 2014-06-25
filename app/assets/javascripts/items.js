@@ -1,10 +1,21 @@
 function initialize() {
+		
     var mapOptions = {
         zoom: 11,
         streetViewControl: false
     };
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
+
+
+
+    // $('#showfavorites').click(function(e){
+				// 					removeMarkers();
+				// 					var favoritesData = '/favorite.json'
+				// 					e.preventDefault();
+				// 					everything(favoritesData);
+    //   						console.log("hello");
+    //   					});
 
     //HTML5 geolocation
     if (navigator.geolocation) {
@@ -14,6 +25,24 @@ function initialize() {
                 var bag = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
                 var markers = []
+                var allData = '/items.json'
+                var favoritesData = '/favorite.json'
+                function removeMarkers(){
+    							if (markers) {
+        						for (i in markers) {
+            						markers[i].setMap(null);
+        						}
+       						  markers = [];
+    							}
+								}
+								
+    						$('#showfavorites').click(function(e){
+									removeMarkers();
+									var favoritesData = '/favorite.json'
+									e.preventDefault();
+									everything(favoritesData);
+      						console.log("hello");
+      					});								
 							  var marker = new google.maps.Marker({
                     position: pos,
                     draggable: false,
@@ -28,7 +57,9 @@ function initialize() {
    								 $('#alert-window').fadeOut(2000);
 								});
 
-                $.ajax('/items.json', {
+							  	
+							var everything =  function(allData){
+                $.ajax(allData, {
                     type: 'get'
                 }).success(function(data) {
                     for (var x in data) {
@@ -63,8 +94,7 @@ function initialize() {
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
              	         		});
-                        
-                        	
+                                                  
                             // Creates new marker and pushes into markers array
                           markers[data[x]["id"]] = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
@@ -77,6 +107,8 @@ function initialize() {
                             imageInfo: image,
                             emailInfo: email,
                             phoneInfo: phone,
+                            latInfo: data[x]["lat"],
+                            longInfo: data[x]["long"],
                             descriptionInfo: description,
                             map: map
 												 	})
@@ -87,23 +119,29 @@ function initialize() {
     															scrollTo = $('#' + this.idInfo);
 																	container.scrollTop(
     																scrollTo.offset().top - container.offset().top + container.scrollTop()
-																);
+																	);
 																	$('#' + this.idInfo).toggleClass("hover");
-													});
+												});
 													
-													google.maps.event.addListener(markers[data[x]["id"]], 'mouseout', function() {
-    													this.setOpacity(.5);
-    													$('#' + this.idInfo).toggleClass("hover");
-													});
+												google.maps.event.addListener(markers[data[x]["id"]], 'mouseout', function() {
+    												this.setOpacity(.5);
+    												$('#' + this.idInfo).toggleClass("hover");
+												});
                        
 
                        var openWindow = function() {google.maps.event.addListener(markers[data[x]["id"]], 'click', function() {
-                                infowindow.setContent('<h3 style="text-align:center;">' + this.titleInfo + '</h3>' + '</br>' +
-                                    '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + this.imageInfo + '>' + '</br>' +
-                                    this.descriptionInfo + '</br>' + '</br>' + 'Email Address: ' + this.emailInfo + '</br>' +
-                                    'Phone: ' + this.phoneInfo + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
-                                );
-                                
+                                var saveEmail = this.emailInfo
+                                var saveName = this.titleInfo
+                                var saveImage = this.imageInfo
+                                var saveDescription = this.descriptionInfo
+                                var savePhone = this.phoneInfo
+                                var saveLat = this.latInfo
+                                var saveLong = this.longInfo
+                                infowindow.setContent('<h3 style="text-align:center;">' + saveName + '</h3>' + '</br>' +
+                                    '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + saveImage + '>' + '</br>' +
+                                    saveDescription + '</br>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
+                                    'Phone: ' + savePhone + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
+                                );                 
                                 infowindow.open(map, this);
                                 
                                
@@ -113,9 +151,6 @@ function initialize() {
 																	container.scrollTop(
     																scrollTo.offset().top - container.offset().top + container.scrollTop()
 																);
-
-
-                                // $('#' + this.idInfo).toggleClass("hover");
 																
 																//Infowindow Email Setup and AJAX backend connection
 																google.maps.event.addListener(infowindow, 'domready', function() {
@@ -141,19 +176,46 @@ function initialize() {
                                     	}
                                 		});
                                   })
+																
+																$('#favorite').click(function(e){																
+																	  e.preventDefault();
 
-
+                                		$('#sentemail').append('</br><div style="color:green">Saved to Favorites!</div>')
+                                		$.ajax({
+                                   	  url: ('/favorite'),
+                                    	method: ('post'),
+                                    	data: {
+                                        "favorite": {
+                                            "name": saveName, "image": saveImage, "description": saveDescription, "email": saveEmail, "lat": saveLat, "long": saveLong, "phone": savePhone
+                                        }
+                                    	},
+                                    	dataType: "json",
+                                    	success: function(data) {
+                                        console.log(data);
+                                    	}
+                                		});
+                                  })
 
 																});
 												});
 
 											} //thisone
 											openWindow();
+
+											
                 		}
-              	});
+              		});
+								}
+								everything(allData);
 
-
-
+								// $('#showfavorites').click(function(e){
+								// 	removeMarkers();
+								// 	var favoritesData = '/favorite.json'
+								// 	e.preventDefault();
+								// 	everything(favoritesData);
+      		// 				console.log("hello");
+      		// 			});
+      						
                     map.setCenter(pos);
                 }, function() {
                     handleNoGeolocation(true);
