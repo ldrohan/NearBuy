@@ -7,16 +7,6 @@ function initialize() {
     map = new google.maps.Map(document.getElementById('map-canvas'),
         mapOptions);
 
-
-
-    // $('#showfavorites').click(function(e){
-				// 					removeMarkers();
-				// 					var favoritesData = '/favorite.json'
-				// 					e.preventDefault();
-				// 					everything(favoritesData);
-    //   						console.log("hello");
-    //   					});
-
     //HTML5 geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -36,10 +26,10 @@ function initialize() {
     							}
 								}
 								
-    						$('#showfavorites').click(function(e){
+    						$('#showfavorites').click(function(e){		
 									removeMarkers();
 									$('.listitem').remove();
-									var favoritesData = '/favorite.json'
+									var favoritesData = '/favorite.json'								
 									e.preventDefault();
 									everything(favoritesData); //executes correct json data call for favorites
       						console.log("Muh Favez");
@@ -64,10 +54,12 @@ function initialize() {
                     title: "Current Location"
                 });
 
-							  google.maps.event.addListenerOnce(map, 'idle', function(){
+							  var loading = function(){
+							  	google.maps.event.addListenerOnce(map, 'idle', function(){
    								 $('#alert-window').fadeOut(2000);
-								});
-
+									});
+							  }	
+							  loading();
 							  	
 							var everything =  function(allData){
                 $.ajax(allData, {
@@ -189,44 +181,33 @@ function initialize() {
                                   })
 																
 																$('#favorite').click(function(e){																
-																	  e.preventDefault();
+																	e.preventDefault();
 
-                                		$('#sentemail').append('</br><div style="color:green">Saved to Favorites!</div>')
-                                		$.ajax({
-                                   	  url: ('/favorite'),
-                                    	method: ('post'),
-                                    	data: {
-                                        "favorite": {
-                                            "name": saveName, "image": saveImage, "description": saveDescription, "email": saveEmail, "lat": saveLat, "long": saveLong, "phone": savePhone
-                                        }
-                                    	},
-                                    	dataType: "json",
-                                    	success: function(data) {
-                                        console.log(data);
-                                    	}
-                                		});
-                                  })
-
-																});
+                                	$('#sentemail').append('</br><div style="color:green">Saved to Favorites!</div>')
+                                	$.ajax({
+                                   	url: ('/favorite'),
+                                   	method: ('post'),
+                                   	data: {
+                                      "favorite": {
+                                          "name": saveName, "image": saveImage, "description": saveDescription, "email": saveEmail, "lat": saveLat, "long": saveLong, "phone": savePhone
+                                      }
+                                   	},
+                                   	dataType: "json",
+                                   		success: function(data) {
+                                      console.log(data);
+                                   	}
+                                	});
+                                })
+															});
 												});
 
 											} //thisone
-											openWindow();
-
-											
+											openWindow();											
                 		}
               		});
 								}
 								everything(allData);
 
-								// $('#showfavorites').click(function(e){
-								// 	removeMarkers();
-								// 	var favoritesData = '/favorite.json'
-								// 	e.preventDefault();
-								// 	everything(favoritesData);
-      		// 				console.log("hello");
-      		// 			});
-      						
                     map.setCenter(pos);
                 }, function() {
                     handleNoGeolocation(true);
