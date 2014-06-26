@@ -35,17 +35,6 @@
 
 }
 
-#tagline {
-color: white;
-font-family: 'Pacifico', cursive;
-font-weight: bold;
-position: absolute;
-padding-top: .55em;
-padding-left: 13px;
-text-align: center;
-}
-
-
 #right {
 	margin-left: 300px;
 }
