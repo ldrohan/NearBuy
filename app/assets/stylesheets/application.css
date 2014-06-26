@@ -19,7 +19,7 @@
  }
  #header{
  	color: white
- 	background: #aadd55 url() repeat-x bottom;
+ 	background: #aadd55;
 	position: relative;
 	border-bottom: 1px solid #FFF;
 /*	z-index: 11;*/
@@ -28,7 +28,7 @@
  #logo {
  	color: white;
  	font-family: 'Pacifico', cursive;
-	background: #2ecc71 url() no-repeat 195px 15px;
+	background: #2ecc71;
 	padding: .2em;
 	text-align: center;
 	font-size: 20px;
