@@ -8,7 +8,7 @@ function initialize() {
     var style_array = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
 
     var mapOptions = {
-        zoom: 9,
+        zoom: 10,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
     styles: style_array
@@ -24,6 +24,7 @@ function initialize() {
                     position.coords.longitude);
                 var bag = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
+                var selected_marker = 'https://www.mynycb.com/SiteCollectionImages/NYCBWebSite/mylocation.png'
                 var markers = []
                 var allData = '/items.json'
                 var favoritesData = '/favorite.json'
@@ -103,6 +104,7 @@ function initialize() {
              	         		$('.listitem').click(function(){
 	                       		var current = markers[this.id]
                         		map.panTo(current.getPosition());
+                        		current.setIcon(selected_marker);
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
              	         		});
