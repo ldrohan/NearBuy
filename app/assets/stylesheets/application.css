@@ -165,6 +165,16 @@
 	color: white;
 }
 
+#infowindowtitle{
+	font-family: 'Pacifico', cursive;
+	font-size: 23px;
+}
+
+#infowindowbody{
+	font-family: 'Open Sans',sans-serif;
+	font-size: 17px;
+}
+
 #alert-window {
 	position: absolute;
 	z-index: 999999;

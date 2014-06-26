@@ -48,6 +48,8 @@ function initialize() {
 
       					$('#showresults').click(function(e){
 									removeMarkers();
+									map.setCenter(pos);
+									map.setZoom(10);
 									$('.listitem').remove();
 									var allData = '/items.json'
 									e.preventDefault();
@@ -151,13 +153,24 @@ function initialize() {
                                 var savePhone = this.phoneInfo
                                 var saveLat = this.latInfo
                                 var saveLong = this.longInfo
-                                infowindow.setContent('<h3 style="text-align:center;">' + saveName + '</h3>' + '</br>' +
-                                    '<IMG BORDER="0" ALIGN="Left" HEIGHT="50" WIDTH="50" SRC=' + saveImage + '>' + '</br>' +
+                                if(savePhone != null){
+                                infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
+                                    '<IMG BORDER="0" ALIGN="Left" HEIGHT="85" WIDTH="85" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
                                     saveDescription + '</br>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
-                                    'Phone: ' + savePhone + '</br>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
-                                );                 
-                                infowindow.open(map, this);
+                                    'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
+                                );
+                              }else{
+                              	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
+                                    '<IMG BORDER="0" ALIGN="Left" HEIGHT="95" WIDTH="95" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
+                                    saveDescription + '</br>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform"><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Email Body"></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>'
+                                );
+
+                              }
                                 
+                                	
+                                                 
+                                infowindow.open(map, this);
+                            
                                
                                 //Scrolls to correct results id on selected pointer from map
                                 var container = $('.results'),

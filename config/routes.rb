@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'items#index'
+  root 'items#map'
   
   get '/items' => 'items#index'
   get '/map' => 'items#map'
