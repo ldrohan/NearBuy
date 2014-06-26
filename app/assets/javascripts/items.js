@@ -179,7 +179,7 @@ function initialize() {
                                     	method: ('post'),
                                     	data: {
                                         "email": {
-                                            "from": from, "to": email, "body": body
+                                            "from": from, "to": saveEmail, "body": body
                                         }
                                     	},
                                     	dataType: "json",

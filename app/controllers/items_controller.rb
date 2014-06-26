@@ -11,6 +11,7 @@ class ItemsController < ApplicationController
 
 	def send_email
 		@email = params["email"]["body"]
+		binding.pry
 		PostMailer.post_email(params["email"]["from"],params["email"]["to"],params["email"]["body"]).deliver
 		
 	end	
