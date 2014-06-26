@@ -18,11 +18,10 @@
  	background-color: #F2F1EF;
  }
  #header{
- 	color: white
+ 	color: white;
  	background-color:#aadd55;
 	position: relative;
 	border-bottom: 1px solid #FFF;
-/*	z-index: 11;*/
  }
 
  #logo {
