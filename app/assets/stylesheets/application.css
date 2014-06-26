@@ -19,7 +19,7 @@
  }
  #header{
  	color: white
- 	background: #aadd55;
+ 	background-color:#aadd55;
 	position: relative;
 	border-bottom: 1px solid #FFF;
 /*	z-index: 11;*/
@@ -37,7 +37,7 @@
 }
 
 #right {
-	margin-left: 300px
+	margin-left: 300px;
 }
 
 #items-header{
