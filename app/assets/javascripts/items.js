@@ -133,9 +133,9 @@ function initialize() {
     													this.setOpacity(1);
     													var container = $('.results'),
     															scrollTo = $('#' + this.idInfo);
-																	container.scrollTop(
+																	$(container).animate({  scrollTop:
     																scrollTo.offset().top - container.offset().top + container.scrollTop()
-																	);
+																	},400);
 																	$('#' + this.idInfo).toggleClass("hover");
 												});
 													
@@ -175,16 +175,11 @@ function initialize() {
                                 infowindow.open(map, this);
                             
                                
-                                //Scrolls to correct results id on selected pointer from map
-                                var container = $('.results'),
-    															scrollTo = $('#' + this.idInfo);
-																	container.scrollTop(
-    																scrollTo.offset().top - container.offset().top + container.scrollTop()
-																);
+
 																
-																//Infowindow Email Setup and AJAX backend connection
-																google.maps.event.addListener(infowindow, 'domready', function() {
-    															$('#submit').click(function(e){
+								    //Infowindow Email Setup and AJAX backend connection
+									google.maps.event.addListener(infowindow, 'domready', function() {
+    								$('#submit').click(function(e){
                                 		var from = $("#from").val();
                                 		var body = $("#body").val();
                                 		e.preventDefault();
