@@ -1,17 +1,12 @@
 function initialize() {
-		
-    // var mapOptions = {
-    //     zoom: 9,
-    //     streetViewControl: false
-    // };
-
+	
     var style_array = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
 
     var mapOptions = {
         zoom: 10,
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
-    styles: style_array
+        styles: style_array
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'),
@@ -128,24 +123,19 @@ function initialize() {
                             descriptionInfo: description,
                             map: map
 												 	})
-                        
+                        //adds opacity to marker on hover
                         google.maps.event.addListener(markers[data[x]["id"]], 'mouseover', function() {
-    													this.setOpacity(1);
-    													var container = $('.results'),
-    															scrollTo = $('#' + this.idInfo);
-																	$(container).animate({  scrollTop:
-    																scrollTo.offset().top - container.offset().top + container.scrollTop()
-																	},400);
-																	$('#' + this.idInfo).toggleClass("hover");
-												});
+    					  this.setOpacity(1);
+						});
 													
-												google.maps.event.addListener(markers[data[x]["id"]], 'mouseout', function() {
-    												this.setOpacity(.5);
-    												$('#' + this.idInfo).toggleClass("hover");
-												});
+						//removes opacity from marker when mouse leaves			
+                        google.maps.event.addListener(markers[data[x]["id"]], 'mouseout', function() {
+    				      this.setOpacity(.5);
+					    });
                        
-
                        var openWindow = function() {google.maps.event.addListener(markers[data[x]["id"]], 'click', function() {
+
+                                var closeID = this.idInfo   
                                 var saveEmail = this.emailInfo
                                 var saveName = this.titleInfo
                                 var saveImage = this.imageInfo
@@ -153,6 +143,21 @@ function initialize() {
                                 var savePhone = this.phoneInfo
                                 var saveLat = this.latInfo
                                 var saveLong = this.longInfo
+
+                                google.maps.event.addListener(infowindow,'closeclick',function(){
+                                    //removes hover style from corresponding scroll item upon closing infowindow
+                                    // map.panTo(current.getPosition());
+                                    $('#' + closeID).toggleClass("hover");
+                                });
+
+                                var container = $('.results'),
+
+                                    scrollTo = $('#' + this.idInfo);
+                                    $(container).animate({  scrollTop:
+                                        scrollTo.offset().top - container.offset().top + container.scrollTop()
+                                        },400);
+                                        $('#' + this.idInfo).toggleClass("hover");
+
 	                                if(allData === '/favorite.json'){
 	                                	$('#remove').append('<button id="removefavorite">Remove Shit</button>');
 	                                }
@@ -173,9 +178,8 @@ function initialize() {
                                 	
                                                  
                                 infowindow.open(map, this);
-                            
-                               
 
+                                
 																
 								    //Infowindow Email Setup and AJAX backend connection
 									google.maps.event.addListener(infowindow, 'domready', function() {
@@ -202,8 +206,8 @@ function initialize() {
                                 		});
                                   })
 																
-																$('#favorite').click(function(e){																
-																	e.preventDefault();
+								$('#favorite').click(function(e){																
+									e.preventDefault();
 
                                 	$('#sentemail').append('</br><div style="color:green">Saved to Favorites!</div>')
                                 	$.ajax({
