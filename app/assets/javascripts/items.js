@@ -38,8 +38,8 @@ function initialize() {
 									var favoritesData = '/favorite.json'								
 									e.preventDefault();
 									everything(favoritesData); //executes correct json data call for favorites
-      						console.log("Muh Favez");
-      					});	
+      						        console.log("Muh Favez");
+      					    });	
 
       					$('#showresults').click(function(e){
 									removeMarkers();
@@ -104,6 +104,7 @@ function initialize() {
                         		current.setIcon(selected_marker);
                         		current.setOpacity(1);
                         		$(this).addClass("hover");
+                                google.maps.event.trigger(current, 'click');
              	         		});
                                                   
                             // Creates new marker and pushes into markers array
