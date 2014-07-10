@@ -112,7 +112,7 @@ function initialize() {
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
                             draggable: false,
                             opacity: .5,
-														animation: google.maps.Animation.DROP,
+						    animation: google.maps.Animation.DROP,
                             icon: bag,
                             idInfo: id,
                             titleInfo: name,
