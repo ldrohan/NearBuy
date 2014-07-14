@@ -2,7 +2,7 @@ namespace :data do
   desc "Scraping CraigslistAPI Data"
   task :scrape => :environment do
     require "typhoeus"
-    results = Typhoeus.get("https://102bf0c0.ngrok.com/items.json").body
+    results = Typhoeus.get("http://2834a869.ngrok.com/items.json").body
     items = JSON.parse(results)
 
     items.each do |i|

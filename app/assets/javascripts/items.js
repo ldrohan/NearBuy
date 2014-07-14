@@ -165,13 +165,13 @@ function initialize() {
                                 if(savePhone != null){                                	
                                 	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
                                     '<IMG id="thumbnail" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
-                                    saveDescription + '</br>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
+                                    saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
                                     'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '</br>' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button><div id="remove">hi</div>'
                                 );
                               }else{
                               	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
                                     '<IMG id="thumbnail" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
-                                    saveDescription + '</br>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>' + '<div id="remove"></div>'
+                                    saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>' + '<div id="remove"></div>'
                                 );
 
                               }
