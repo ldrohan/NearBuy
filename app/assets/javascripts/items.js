@@ -84,7 +84,7 @@ function initialize() {
                         var description = data[x]["description"]
 
 
-                        var list = $('.results').append('<div class="listitem" id=' + id + '>' + name +  '</br>' + '</div>')
+                        var list = $('.results').append('<div class="listitem" id=' + id + '>' + '<div><img id=thumbnail src=' + image + '></div><div>' + name +  '</div></br>' + '</div>')
                         	
                         	$('.listitem').mouseenter(function(){
                         		var current = markers[this.id]
