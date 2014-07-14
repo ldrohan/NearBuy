@@ -17,7 +17,7 @@ function initialize() {
         navigator.geolocation.getCurrentPosition(function(position) {
                 var pos = new google.maps.LatLng(position.coords.latitude,
                     position.coords.longitude);
-                var bag = 'http://www.topfurnitures.com/wp-content/themes/TheJewelryShopDark/images/shopping_icon.jpg';
+                var bag = '/assets/favoritemarker.png';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
                 var selected_marker = 'https://www.mynycb.com/SiteCollectionImages/NYCBWebSite/mylocation.png'
                 var markers = []
@@ -111,7 +111,7 @@ function initialize() {
                           markers[data[x]["id"]] = new google.maps.Marker({
                             position: new google.maps.LatLng(data[x]["lat"], data[x]["long"]),
                             draggable: false,
-                            opacity: .5,
+                            opacity: .7,
 						    animation: google.maps.Animation.DROP,
                             icon: bag,
                             idInfo: id,
@@ -166,7 +166,7 @@ function initialize() {
                                 	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
                                     '<IMG id="thumbnail" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
                                     saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
-                                    'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '</br>' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button><div id="remove">hi</div>'
+                                    'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '</br>' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button><div id="remove"></div>'
                                 );
                               }else{
                               	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
