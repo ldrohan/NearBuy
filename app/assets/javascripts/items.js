@@ -1,5 +1,9 @@
 function initialize() {
-	
+	$('#logo').click(function(){
+        modal.open({content: "<header class='modal-header' id='modalheader'><h4 id='modalname'>" + "Luke Drohan" + "</h4></header><img id='modalpic' src=/assets/WDI_bw_Luke.jpg><p id='modalbio'>" + 'Hi! My name is Luke Drohan. I built this application for my final project at General Assemblys Web Development Immersive Course. I am still working on it, so stay tuned for upgrades and enhancements. Thanks!' + "</p>" + 
+        "<footer class='modal-footer'><a href='" +  "Luke" + "'target=_blank>LinkedIn</a>" + ' | ' + "<a href='" + 'Luke' + "'target=_blank>GitHub</a>" + ' | ' + "<a href='" + 'www.lukedrohan.com' + "'target=_blank>Personal Website</a></footer>"  });
+        });
+    
     var style_array = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
 
     var mapOptions = {
@@ -24,22 +28,31 @@ function initialize() {
                 var allData = '/items.json'
                 var favoritesData = '/favorite.json'
                 function removeMarkers(){
-    							if (markers) {
-        						for (i in markers) {
-            						markers[i].setMap(null);
-        						}
-       						  markers = [];
-    							}
-								}
+    			  if (markers) {
+        			  for (i in markers) {
+            		   markers[i].setMap(null);
+        			  } 
+       				  markers = [];
+    			  }
+				}
+
+                function validateForm() {
+                  var x = $('#from').val();
+                  if (x == null || x == "") {
+                        alert("Email must be filled out");
+                        return false;
+                    }
+                }
+
 								
-    						$('#showfavorites').click(function(e){		
-									removeMarkers();
-									$('.listitem').remove();
-									var favoritesData = '/favorite.json'								
-									e.preventDefault();
-									everything(favoritesData); //executes correct json data call for favorites
-      						        console.log("Muh Favez");
-      					    });	
+    					$('#showfavorites').click(function(e){		
+								removeMarkers();
+								$('.listitem').remove();
+								var favoritesData = '/favorite.json'								
+								e.preventDefault();
+								everything(favoritesData); //executes correct json data call for favorites
+      						    console.log("Muh Favez");
+      					 });	
 
       					$('#showresults').click(function(e){
 									removeMarkers();
@@ -52,7 +65,7 @@ function initialize() {
       						console.log("The Real OG");
       					});	
 
-							  var marker = new google.maps.Marker({
+				var marker = new google.maps.Marker({
                     position: pos,
                     draggable: false,
                     opacity: .7,
@@ -151,6 +164,7 @@ function initialize() {
                                     $('#' + closeID).toggleClass("hover");
                                 });
 
+
                                 var container = $('.results'),
 
                                     scrollTo = $('#' + this.idInfo);
@@ -166,18 +180,18 @@ function initialize() {
                                 	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
                                     '<IMG id="thumbnail" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
                                     saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' +
-                                    'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '</br>' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button><div id="remove"></div>'
+                                    'Phone: ' + '<span id="phonespan">' + savePhone + '<span>' + '</br>' + '<span>' + '<span id ="sentemail">' + '</br>' + '<form id="emailform" onsubmit="return validateForm()"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button><div id="remove"></div>'
                                 );
                               }else{
                               	infowindow.setContent('<h3 id="infowindowtitle" style="text-align:center;">' + saveName + '</h3>' + '</br>' +
                                     '<IMG id="thumbnail" SRC=' + saveImage + '>' + '<span id="infowindowbody">' + '</br>' +
-                                    saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>' + '<div id="remove"></div>'
+                                    saveDescription + '<hr></hr>' + '</br>' + 'Email Address: ' + saveEmail + '</br>' + '</br>' + '<span>' + '<span id ="sentemail">' + '<form id="emailform" onsubmit="return validateForm()"><div>Subject: Hi! I\'m Interested In Your Post...<div><input id="from" placeholder="Your Email Address"></input></br><textarea id="body" placeholder="Say Something Nice..."></textarea></br><button class="button" id="submit" type="submit">Send Email!</button></form>' + '</span>' + '<button class="button" id="favorite" type="submit">Add To Favorites!</button>' + '<div id="remove"></div>'
                                 );
 
                               }
                                 
                                 	
-                                                 
+                        
                                 infowindow.open(map, this);
 
                                 
