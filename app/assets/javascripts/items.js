@@ -1,7 +1,7 @@
 function initialize() {
 	$('#logo').click(function(){
         modal.open({content: "<header class='modal-header' id='modalheader'><h4 id='modalname'>" + "Luke Drohan" + "</h4></header><img id='modalpic' src=/assets/WDI_bw_Luke.jpg><p id='modalbio'>" + 'Hi! My name is Luke Drohan. I built this application for my final project at General Assemblys Web Development Immersive Course. I am still working on it, so stay tuned for upgrades and enhancements. Thanks!' + "</p>" + 
-        "<footer class='modal-footer'><a href='" +  "Luke" + "'target=_blank>LinkedIn</a>" + ' | ' + "<a href='" + 'Luke' + "'target=_blank>GitHub</a>" + ' | ' + "<a href='" + 'www.lukedrohan.com' + "'target=_blank>Personal Website</a></footer>"  });
+        "<footer class='modal-footer'><a href='" +  "https://www.linkedin.com/pub/luke-drohan/8b/289/943" + "'target=_blank>LinkedIn</a>" + ' | ' + "<a href='" + 'https://github.com/ldrohan' + "'target=_blank>GitHub</a>" + ' | ' + "<a href='" + 'https://www.lukedrohan.com' + "'target=_blank>Personal Website</a></footer>"  });
         });
     
     var style_array = [{"stylers":[{"saturation":-100}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#0099dd"}]},{"elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#aadd55"}]},{"featureType":"road.highway","elementType":"labels","stylers":[{"visibility":"on"}]},{"featureType":"road.arterial","elementType":"labels.text","stylers":[{"visibility":"on"}]},{"featureType":"road.local","elementType":"labels.text","stylers":[{"visibility":"on"}]},{}]
@@ -75,14 +75,14 @@ function initialize() {
                     title: "Current Location"
                 });
 
-							  var loading = function(){
-							  	google.maps.event.addListenerOnce(map, 'idle', function(){
-   								 $('#alert-window').fadeOut(2000);
-									});
-							  }	
-							  loading();
+				var loading = function(){
+					google.maps.event.addListenerOnce(map, 'idle', function(){
+   				     $('#alert-window').fadeOut(2000);
+				  });
+				}	
+				loading();
 							  	
-							var everything =  function(allData){
+			var everything =  function(allData){
                 $.ajax(allData, {
                     type: 'get'
                 }).success(function(data) {
@@ -239,15 +239,15 @@ function initialize() {
                                    	}
                                 	});
                                 })
-															});
-												});
+							});
+						});
 
-											} //thisone
-											openWindow();											
-                		}
-              		});
-								}
-								everything(allData);
+					} //thisone
+					openWindow();											
+                }
+              });
+			}
+				everything(allData);
 
                     map.setCenter(pos);
                 }, function() {

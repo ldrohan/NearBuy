@@ -32,6 +32,7 @@
 	text-align: center;
 	font-size: 22px;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 #right {
@@ -258,8 +259,6 @@ border:1px solid #aaa;
   padding:8px;
 }
 #content {
-	/*height: auto;
-	width: auto;*/
   background:rgba(255,255,255, 0.8);
 }
 
@@ -278,15 +277,18 @@ border:1px solid #aaa;
 }
 #modalheader{
 	background-color: #3498db;
+	height: 3em;
 }
 #modalpic{
 	height: 100px;
 	width:100px;
+	padding-top: 4px;
 	padding-left: 5px;
 	padding-right: 5px;
 	float:left;
 }
 #modalname{
+	padding-top: 1em;
 	text-align: center;
 	color: white;
 }
@@ -294,9 +296,11 @@ border:1px solid #aaa;
 	height:75px;
 	padding-left: 20px;
 	padding-right: 8px;
+	font-family: arial;
 }
 .modal-footer{
-	max-height: 55px;
+	padding-top: 1em;
+	height:2em;
 	text-align: center;
 	background-color: #2ecc71;
 }
