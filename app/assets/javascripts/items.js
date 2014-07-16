@@ -1,6 +1,6 @@
 function initialize() {
 	$('#logo').click(function(){
-        modal.open({content: "<header class='modal-header' id='modalheader'><h4 id='modalname'>" + "About The Developer" + "</h4></header><img id='modalpic' src=/assets/WDI_bw_Luke.jpg><p id='modalbio'>" + 'Hi! My name is Luke Drohan. I built this application for my final project at General Assemblys Web Development Immersive Course. This application is powered by a craigslist WebScraper API I built as a separate application. I am still working on it, so stay tuned for upgrades and enhancements. Thanks!' + "</p>" + 
+        modal.open({content: "<header class='modal-header' id='modalheader'><h4 id='modalname'>" + "About The Developer" + "</h4></header><img id='modalpic' src=/assets/WDI_bw_Luke.jpg><p id='modalbio'>" + 'Hi! My name is Luke Drohan. I built this application for my final project at General Assemblys Web Development Immersive Course. I am still working on it, so stay tuned for upgrades and enhancements. Thanks!' + "</p>" + 
         "<footer class='modal-footer'><a href='" +  "https://www.linkedin.com/pub/luke-drohan/8b/289/943" + "'target=_blank>LinkedIn</a>" + ' | ' + "<a href='" + 'https://github.com/ldrohan' + "'target=_blank>GitHub</a>" + ' | ' + "<a href='" + 'http://ldrohan.github.io' + "'target=_blank>Personal Website</a></footer>"  });
         });
     
