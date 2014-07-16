@@ -9,7 +9,13 @@ namespace :data do
       @item = Item.new
       @item.name = i['name']
       @item.description = i['description']
-      @item.image = i['image']
+      
+      if i['image'] == nil
+        @item.image = '/assets/noimage.jpg'
+      else
+        @item.image = i['image']
+      end    
+      
       @item.email = i['email']
       @item.lat = i['lat']
       @item.long = i['long']
