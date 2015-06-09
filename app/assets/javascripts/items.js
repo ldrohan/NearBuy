@@ -19,8 +19,7 @@ function initialize() {
     //HTML5 geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-                var pos = new google.maps.LatLng(position.coords.latitude,
-                    position.coords.longitude);
+                var pos = new google.maps.LatLng(37.773972, -122.431297);
                 var bag = '/assets/favoritemarker.png';
                 var current = 'http://img.lib.msu.edu/mobile/user_icon_g.png';
                 var selected_marker = 'https://www.mynycb.com/SiteCollectionImages/NYCBWebSite/mylocation.png'
